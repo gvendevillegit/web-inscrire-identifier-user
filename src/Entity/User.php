@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
+use DateTime;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
 use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\DeletedAtTrait;
 use App\Entity\Trait\UpdatedAtTrait;
-use Doctrine\ORM\Mapping as ORM;
-use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -46,7 +47,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-
+        $this->CreatedAt = new DateTime();
+        $this->updatedAt = new DateTime();
     }
 
     public function getId(): ?int
