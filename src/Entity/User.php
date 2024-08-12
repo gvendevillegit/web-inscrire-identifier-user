@@ -19,6 +19,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     use UpdatedAtTrait;
     use DeletedAtTrait;
 
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
