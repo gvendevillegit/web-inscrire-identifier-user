@@ -9,17 +9,17 @@ trait DeletedAtTrait
 {
     // Attribu(s)
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $DeletedAt = null;
+    private ?\DateTimeImmutable $deletedAt = null;
 
     // Accesseur(s) et Mutateur(s)
     public function getDeletedAt(): ?\DateTimeImmutable
     {
-        return $this->DeletedAt;
+        return $this->deletedAt;
     }
 
-    public function setDeletedAt(?\DateTimeImmutable $DeletedAt): static
+    public function setDeletedAt(?\DateTimeImmutable $deletedAt): static
     {
-        $this->DeletedAt = $DeletedAt;
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }

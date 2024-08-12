@@ -9,17 +9,17 @@ trait CreatedAtTrait
 {
     // Attribu(s)
     #[ORM\Column]
-    private ?\DateTimeImmutable $CreatedAt = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     // Accesseur(s) et Mutateur(s)
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->CreatedAt;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $CreatedAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->CreatedAt = $CreatedAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }

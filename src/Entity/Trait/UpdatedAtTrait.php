@@ -9,17 +9,17 @@ trait UpdatedAtTrait
 {
     // Attribu(s)
     #[ORM\Column]
-    private ?\DateTimeImmutable $UpdatedAt = null;
+    private ?\DateTimeImmutable $updatedAt = null;
 
     // Accesseur(s) et Mutateur(s)
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
-        return $this->UpdatedAt;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $UpdatedAt): static
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
-        $this->UpdatedAt = $UpdatedAt;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

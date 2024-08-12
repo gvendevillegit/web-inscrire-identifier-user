@@ -19,7 +19,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     use UpdatedAtTrait;
     use DeletedAtTrait;
 
-    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -48,7 +48,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->CreatedAt = new DateTime();
+        $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
     }
 
