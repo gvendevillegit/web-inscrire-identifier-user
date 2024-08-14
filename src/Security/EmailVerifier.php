@@ -17,6 +17,7 @@ class EmailVerifier
         private MailerInterface $mailer,
         private EntityManagerInterface $entityManager
     ) {
+        $this->mailer = $mailer;
     }
 
     public function sendEmailConfirmation(string $verifyEmailRouteName, User $user, TemplatedEmail $email): void

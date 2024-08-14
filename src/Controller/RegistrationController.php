@@ -25,13 +25,29 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, 
+                                UserPasswordHasherInterface $userPasswordHasher, 
+                                Security $security, 
+                                EntityManagerInterface $entityManager): Response
     {
+        # Si l'utilisateur est connecté, alors on le redirige.
+        if($this->getUser()){
+            $this->addFlash('warning', "Vous êtes déjà inscrit");
+            return $this->redirectToRoute('app_home');
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Initialisation des attributs non null
+            $user->setEmail($form->get('email')->getData());
+            // $user->setRoles(['ROLE_USER']);
+            $user->setFirstName($form->get('firstName')->getData());
+            $user->setLastName($form->get('lastName')->getData());
+
             // encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -65,10 +81,13 @@ class RegistrationController extends AbstractController
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {
+        $user = $this->getUser();
+        
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
+            $user->setRoles(['ROLE_USER']);
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));

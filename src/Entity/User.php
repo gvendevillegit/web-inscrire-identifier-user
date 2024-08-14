@@ -21,7 +21,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     use UpdatedAtTrait;
     use DeletedAtTrait;
 
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -53,8 +52,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->createdAt = new DateTime();
-        $this->updatedAt = new DateTime();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -93,7 +92,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        // $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }

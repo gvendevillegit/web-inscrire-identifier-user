@@ -30,6 +30,10 @@
             {% endblock %}
         </header>
 
+        {% block flashes %}
+            {% include 'include/_flashes.html.twig' %}
+        {% endblock %}
+
         <div class="container">
             {% block container %}
                 <h3>contenu non trouvé</h3>
