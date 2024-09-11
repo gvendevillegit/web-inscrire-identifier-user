@@ -15,6 +15,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
@@ -177,6 +178,7 @@ class ResetPasswordController extends AbstractController
     }
 
     #[Route('/profil', name: 'app_password_change')]
+    #[IsGranted("ROLE_USER")]
     public function passwordChange(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = $this->getUser();
